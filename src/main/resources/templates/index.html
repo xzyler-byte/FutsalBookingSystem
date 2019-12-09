@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<head></head>
+<body class="landing">
+	<div th:replace="fragments/header :: header">&nbsp;</div>
+</head>
+<div id="page-wrapper">
+	<!-- Banner -->
+	<section id="banner">
+		<div class="content">
+			<header>
+				<h2>Court Booking System</h2>
+				<p>Welcome to U-Court Booking System. Now you can book you court
+					within a click.</p>
+			</header>
+			<span class="image"><img th:src="@{images/futsal-logo1.png}"
+				alt="" /></span>
+		</div>
+		<a href="#one" class="goto-next scrolly">Next</a>
+	</section>
+
+	<!-- One -->
+	<section id="one" class="spotlight style1 bottom">
+		<!--<span class="image fit main"><img src="images/Futsal-Life-Cropped-Logo.jpg" alt="" /></span>-->
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					<div class="4u 12u(medium)">
+						<header>
+							<h2>
+								<b>MORE ABOUT US</b>
+							</h2>
+							<p>U Court Booking only serve booking services for Futsal and
+								Footbal court</p>
+						</header>
+					</div>
+					<div class="4u 12u(medium)">
+						<p>Tempahan di buat berdasarkan masa dann tarikh yang dipilih
+							oleh pelanggan. Pelanggan perlu mendaftar sebagai ahli sebelum
+							meneruskan transaksi. Kami menyediakan servis yang terbaik untuk
+							pelanggankamis khususnya dari kalangan pelajar.</p>
+					</div>
+					<div class="4u 12u(medium)">
+						<p>Kalas asda dasd eraad rearas pealsa dad sadsdad asdas rawra
+							fag gafa ADafa kulai pontian rjsguvds ersf etsf opos doilisd ersd
+							eres loki fadi lopo koea saedagerue daere yuetea oafsf.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="fragments/header :: footer"></div>
+
+</div>
+
+<div th:replace="fragments/header :: js"></div>
+
+
+</body>
+</html>
