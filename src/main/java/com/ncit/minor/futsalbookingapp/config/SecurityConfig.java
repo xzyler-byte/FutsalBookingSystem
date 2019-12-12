@@ -19,8 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	MyUserDetailService userDetailsService;
-	private static final String[] PUBLIC_MATCHERS = { "/assets/**", "/css/**", "/images/**", "/", "/login/**",
-			"/user/add/","/user/add/**" };
+	private static final String[] PUBLIC_MATCHERS = { "/assets/**", "/css/**", "/images/**", "/", "/login/","/user/add/","/user/add/**","/dologin"};
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
