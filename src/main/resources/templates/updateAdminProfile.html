@@ -8,16 +8,16 @@
 		<div id="main" class="wrapper style1">
 			<div class="container">
 				<header class="major">
-					<h2>REGISTER FORM</h2>
-					<p>Please enter the required field.</p>
+					<h2> Your Profile </h2>
+					<p>Please update the required fields.</p>
 				</header>
 
 				<!-- Content -->
 				<section id="content" align="center">
 
-					<div align="center">
-						<form method="post" th:action="@{/user/add}"
-							th:object="${user}">
+					<div align="center" th:object="${admin}">
+						<form method="post" th:action="@{/admin/update/}+${admin.id}"
+							>
 							<div align="center" class="row uniform 50%">
 								<div class="6u -3u">
 									<input type="text" name="fullname" id="name"
@@ -30,7 +30,7 @@
 									<input type="text" name="username" id="username"
 										th:field="*{username}" placeholder="Username" required>
 									<span style="color: red;"
-										th:if="${usernameExists}">Username already exists.
+										th:if="${error}">Username already exists.
 										Choose a different one.</span>
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 							<div class="row uniform 50%">
 								<div class="12u">
 									<ul class="actions">
-										<li><input type="submit" value="Register Now"
+										<li><input type="submit" value="Update"
 											class="special"></li>
 										<li><input type="reset" value="Reset" class="special"></li>
 									</ul>

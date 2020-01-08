@@ -1,12 +1,8 @@
 package com.ncit.minor.futsalbookingapp.service.impl;
 
 import java.util.List;
-import java.util.Set;
 
-import javax.management.relation.Role;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.ncit.minor.futsalbookingapp.model.Futsal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +12,6 @@ import com.ncit.minor.futsalbookingapp.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
 	@Autowired
 	UserRepository userRepository;
@@ -39,6 +34,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public User findUserByFutsal(Futsal futsal) {
+		return userRepository.findByFutsal(futsal);
 	}
 
 	@Override

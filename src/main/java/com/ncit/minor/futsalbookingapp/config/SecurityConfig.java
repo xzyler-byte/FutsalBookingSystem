@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	MyUserDetailService userDetailsService;
-	private static final String[] PUBLIC_MATCHERS = { "/assets/**", "/css/**", "/images/**", "/", "/login/","/user/add/","/user/add/**","/dologin"};
+	private static final String[] PUBLIC_MATCHERS = { "/assets/**", "/css/**", "/images/**", "/", "/login/","/user/add/","/user/add/**","/dologin","/dologin/**"};
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,8 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated().and().formLogin()
-				.permitAll().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/dologin").and().logout()
+		http.csrf().disable().authorizeRequests()
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/book/**","/book").hasAuthority("USER")
+				.antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated().and().formLogin()
+				.permitAll().loginPage("/login").loginProcessingUrl("/dologin").defaultSuccessUrl("/",true).and().logout()
 				.permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/dologout", "POST")).logoutSuccessUrl("/");
 	}
 

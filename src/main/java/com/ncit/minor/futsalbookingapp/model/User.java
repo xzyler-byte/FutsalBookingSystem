@@ -1,5 +1,6 @@
 package com.ncit.minor.futsalbookingapp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,9 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Booking> bookings;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Futsal> futsal=new ArrayList<>();
 
 	public User() {
 		super();

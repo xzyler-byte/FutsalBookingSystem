@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org">
-<head></head>
+<head>
 <body class="landing">
 	<div th:replace="fragments/header :: header">&nbsp;</div>
 </head>
@@ -24,6 +24,9 @@
 	<section id="one" class="spotlight style1 bottom">
 		<!--<span class="image fit main"><img src="images/Futsal-Life-Cropped-Logo.jpg" alt="" /></span>-->
 		<div class="content">
+			<span style="color: red; float: left;"
+				  sec:authorize ="hasAuthority('ADMIN')"><li><a
+					th:href="@{/admin}" class="button special">Admin</a></li></span>
 			<div class="container">
 				<div class="row">
 					<div class="4u 12u(medium)">
