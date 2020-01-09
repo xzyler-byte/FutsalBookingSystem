@@ -32,6 +32,8 @@
 									<span style="color: red;"
 										th:if="${usernameExists}">Username already exists.
 										Choose a different one.</span>
+									<span style="color: red;"
+										  th:if="${isNumber}">Username should not contain any numeric value.</span>
 								</div>
 							</div>
 

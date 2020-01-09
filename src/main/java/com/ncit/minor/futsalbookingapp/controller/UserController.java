@@ -30,16 +30,22 @@ public class UserController {
 
 	@PostMapping("/add")
 	public String doSignUp(@ModelAttribute("user") User user, Model model) {
-		
+		if(user.getFullname().matches(".*\\d.*"))
+		{
+			model.addAttribute("isNumber",true);
+			return "signup";
+		}
 		if (userService.findByUsername(user.getUsername()) != null) {
 			model.addAttribute("usernameExists", true);
 			return "signup";
 		}
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		model.addAttribute("user", user);
-		userService.save(user);
-		System.out.println(user);
-		return "redirect:/";
+		else {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			model.addAttribute("user", user);
+			userService.save(user);
+			System.out.println(user);
+			return "redirect:/";
+		}
 	}
 	@GetMapping("/update")
 	public String showUpdateProfileForm(Model model, Principal principal)
