@@ -27,6 +27,11 @@
                     </li>
                 </form>
             </ul>
+            <div style="    position: absolute;
+    margin-top: -64%;
+    margin-left: -80%;"><span
+                    sec:authorize="hasAuthority('ADMIN')"><a
+                    th:href="@{/admin}" class="button special">Admin</a></span></div>
         </nav>
         <nav id="nav" sec:authorize="hasAuthority('USER')">
             <ul>

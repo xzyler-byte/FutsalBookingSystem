@@ -2,8 +2,10 @@ package com.ncit.minor.futsalbookingapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
@@ -16,7 +18,10 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String bookingStat;
-	private String bookDate;
+
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@Future
+	private Date bookDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
