@@ -7,13 +7,13 @@ import com.ncit.minor.futsalbookingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import sun.util.calendar.LocalGregorianCalendar;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.security.Principal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class BookingController {
@@ -33,25 +33,31 @@ public class BookingController {
     }
 
     @PostMapping("/book/{futsalId}")
-    public String bookFutsal( @PathVariable Long futsalId, @ModelAttribute Booking booking) {
-        Booking currentBooking=bookingService.findById(booking.getId());
-        currentBooking.setBookDate(booking.getBookDate());
+    public String bookFutsal(@PathVariable Long futsalId, @Valid Booking booking, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("booking", bookingService.findById(booking.getId()));
+            return "bookFutsalForm";
+        }
+        Booking currentBooking = bookingService.findById(booking.getId());
+        String time = booking.getActualBookDate().toLocaleString();
+        currentBooking.setBookDate(time);
         bookingService.save(currentBooking);
         return "index";
     }
 
     @GetMapping("/book/{futsalId}")
-    public String showBookFutsal(Model model,@PathVariable Long futsalId, Principal principal) {
-        Booking booking=new Booking();
+    public String showBookFutsal(Model model, @PathVariable Long futsalId, Principal principal) {
+        Booking booking = new Booking();
         booking.setBookingStat("pending");
         bookingService.save(booking);
         bookingService.createBooking(booking, userService.findByUsername(principal.getName()), futsalService.findById(futsalId));
         model.addAttribute("booking", booking);
         return "bookFutsalForm";
     }
+
     @GetMapping("/book/list")
-    public String bookList(Model model,Principal principal){
-        model.addAttribute("bookings",bookingService.findByUser(userService.findByUsername(principal.getName())));
+    public String bookList(Model model, Principal principal) {
+        model.addAttribute("bookings", bookingService.findByUser(userService.findByUsername(principal.getName())));
         return "bookingList";
     }
 }

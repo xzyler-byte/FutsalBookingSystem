@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
@@ -20,8 +21,12 @@ public class Booking {
 	private String bookingStat;
 
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
-	@Future
-	private Date bookDate;
+	@FutureOrPresent
+	@Transient
+	private Date actualBookDate;
+
+
+	private String bookDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;

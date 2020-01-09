@@ -35,7 +35,9 @@
                         </div>
                         <div class="row uniform 50%">
                             <div class='6u -3u' id='datetimepicker1'>
-                                <input style="background: transparent" type="datetime-local" th:name="bookDate" th:field="*{bookDate}" class="form-control"/>
+                                <input style="background: transparent" type="datetime-local" th:name="actualBookDate" th:field="*{actualBookDate}" class="form-control"/>
+                                <span
+                                        th:if="${#fields.hasErrors('actualBookDate')}" th:errors="*{actualBookDate}">Booking date must be in Future.</span>
                             </div>
                         </div>
 
